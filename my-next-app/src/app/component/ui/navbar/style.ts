@@ -16,6 +16,7 @@ export const Nav = styled.nav`
     width: 100%; 
     padding: 0;
     margin: 0;
+    display: flex;
   }
 `;
 

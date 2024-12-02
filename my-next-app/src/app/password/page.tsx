@@ -24,7 +24,7 @@ const Password = () => {
     
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/forgot-password`, { email });
-            console.log(response.data); // Vérifiez la réponse du backend
+            console.log(response.data); 
             setMessage(response.data.message || 'Un e-mail a été envoyé avec succès.');
         } catch (error) {
             console.log(error); // Log de l'erreur pour déboguer

@@ -1,11 +1,14 @@
-// Sidebar.tsx
+
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MdDashboard } from 'react-icons/md';
 import { SiHotelsdotcom } from 'react-icons/si';
+import {
+  Container, Logo, Adminpro, Admin, Name, P1, Navbar, Ul, Li, Span, Icon, Footer, MobileIcons,
+} from './style';
 
 interface SidebarProps {
   onSelect: (title: string) => void;
@@ -13,27 +16,66 @@ interface SidebarProps {
 
 const Sidebar = ({ onSelect }: SidebarProps) => {
   const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
+
+  const menuItems = [
+    {
+      title: 'Dashboard',
+      icon: <MdDashboard />,
+      path: '/dashboard',
+    },
+    {
+      title: 'Liste des hôtels',
+      icon: <SiHotelsdotcom />,
+      path: '/dashboard/liste',
+    },
+  ];
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
-    <div>
-      <nav>
-        <ul>
-          <li className={pathname === '/dashboard' ? 'active' : ''}>
-            <Link href="/dashboard" onClick={() => onSelect('Dashboard')}>
-              <MdDashboard />
-              <span>Dashboard</span>
-            </Link>
-          </li>
+    <>
+      <Container>
+        <Logo>
+          <img src="/icon.png" alt="icon" />
+          <h1>RED PRODUCT</h1>
+        </Logo>
+        <Name>
+          <P1>Principal</P1>
+        </Name>
+        <Navbar>
+          <Ul>
+            {menuItems.map(({ title, icon, path }) => (
+              <Li key={title} className={pathname === path ? 'active' : ''}>
+                <Link href={path}>
+                  <Adminpro onClick={() => onSelect(title)}>
+                    <Icon className="icon">{icon}</Icon>
+                    <Span className="text">{title}</Span>
+                  </Adminpro>
+                </Link>
+              </Li>
+            ))}
+          </Ul>
+        </Navbar>
+      </Container>
 
-          <li className={pathname === '/dashboard/liste' ? 'active' : ''}>
-            <Link href="/dashboard/liste" onClick={() => onSelect('Liste des hôtels')}>
-              <SiHotelsdotcom />
-              <span>Liste des hôtels</span>
+      {/* Footer Mobile */}
+      <Footer>
+        <MobileIcons>
+          {menuItems.map(({ title, icon, path }) => (
+            <Link key={title} href={path}>
+              {React.cloneElement(icon, {
+                className: pathname === path ? 'active' : '',
+              })}
             </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+          ))}
+        </MobileIcons>
+      </Footer>
+    </>
   );
 };
 
