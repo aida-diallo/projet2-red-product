@@ -28,15 +28,15 @@ export const Logo = styled.h1`
   margin-top: 20px;
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
 
   h1 {
     color: white;
     font-weight: 700;
     text-align: center;
-    font-size: 18px;
+    font-size: 25px;
     margin-left: 5px;
   }
 
@@ -121,7 +121,7 @@ export const Li = styled.li`
    &.active {
      background-color: #f0f0f0;
      color: white;
-     padding: 0px 40px;
+     padding: 5px 40px;
    }
 
    &.active .icon {

@@ -1,7 +1,7 @@
-'use client';  // Ajoutez cette ligne au début du fichier
+'use client';
 
-import styled from 'styled-components';
 import React, { useState, ReactNode } from 'react';
+import styled from 'styled-components';
 import Navbar from '../component/ui/navbar/navbar';
 import Sidebar from '../component/ui/sidebar/sidebar';
 
