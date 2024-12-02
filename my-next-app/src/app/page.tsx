@@ -5,7 +5,7 @@ import React from 'react';
 // import './globals.css';
 import Login from './login/page';
 import { Container, Main} from './styles'
-// import RegisterPage from './register/page';
+
 
 
 const HomePage = () => {
@@ -13,7 +13,6 @@ const HomePage = () => {
              <Container>
             <Main>
                <Login />
-               {/* <RegisterPage /> */}
             </Main>
             </Container>
        

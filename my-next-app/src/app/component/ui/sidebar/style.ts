@@ -121,6 +121,7 @@ export const Li = styled.li`
    &.active {
      background-color: #f0f0f0;
      color: white;
+     padding: 0px 40px;
    }
 
    &.active .icon {
