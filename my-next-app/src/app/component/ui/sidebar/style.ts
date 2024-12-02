@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -113,10 +114,30 @@ export const Ul = styled.ul`
 export const Navbar = styled.nav``;
 
 export const Li = styled.li`
-  &:hover {
-    color: black;
-    background-color: #F0F0F0;
-  }
+   margin: 20px 0;
+   border-radius: 8px;
+   transition: all 0.3s ease;
+
+   &.active {
+     background-color: #f0f0f0;
+     color: white;
+   }
+
+   &.active .icon {
+     color: #4a4e52;
+   }
+
+   &.active .text {
+     color: #4a4e52;
+     font-weight: bold;
+   }
+
+   a {
+     text-decoration: none;
+     display: flex;
+     align-items: center;
+     color: white;
+   }
 `;
 
 export const Span = styled.span`
@@ -141,6 +162,7 @@ export const Footer = styled.div`
     box-shadow: 0 0.2px 0.3px rgba(0, 0, 0, 0.2);
     z-index: 10;
   }
+
 `;
 
 export const MobileIcons = styled.div`
@@ -152,4 +174,3 @@ export const MobileIcons = styled.div`
     height: 25px;
   }
 `;
-

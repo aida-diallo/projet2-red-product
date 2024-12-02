@@ -7,13 +7,13 @@ export const Nav = styled.nav`
   background-color: white;
   height: 70px;
   width: 80%;
-  box-shadow: 0 0.2px 0.3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.3px 0.3px rgba(0, 0, 0, 0.2);
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 
   @media (max-width: 768px) {
-    width: 80%; 
+    width: 100%; 
     padding: 0;
     margin: 0;
   }
@@ -126,6 +126,7 @@ export const Monimg2 = styled.div`
 
 export const MonImg = styled.div`
   margin-top: 12px;
+  font-size:25px;
   img {
     width: 15px;
     height: 15px;
