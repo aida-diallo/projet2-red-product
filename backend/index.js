@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('./db'); // Connexion à MongoDB
+const mongoose = require('./db'); 
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
@@ -13,17 +13,17 @@ const HotelModel = require('./models/hotel');
 
 const app = express();
 
-// Middleware
+
 app.use(express.json());
 app.use(cors());
 
-// Vérifier et créer le dossier des images s'il n'existe pas
+
 const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
-// Configuration de Nodemailer
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -32,13 +32,13 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Configuration de Multer pour l'upload des images
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, uploadDir); // Dossier où les images seront stockées
+        cb(null, uploadDir); 
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Nommez l'image avec un timestamp
+        cb(null, Date.now() + path.extname(file.originalname)); 
     },
 });
 
@@ -103,47 +103,39 @@ app.post('/password', async (req, res) => {
     }
 });
 
-// Route pour récupérer tous les hôtels
-app.get('/hotels', async (req, res) => {
+app.post('/hotels', upload.single('image'), (req, res) => {
     try {
-        const hotels = await HotelModel.find();
-        res.json(hotels);
+      const { name, description, email, tel, pricePerNight, currency } = req.body;
+      const image = req.file;  // multer gestion de l'image
+  
+      if (!name || !description || !email || !tel || !pricePerNight) {
+        return res.status(400).send({ message: 'Tous les champs sont obligatoires' });
+      }
+  
+      // Sauvegarder l'hôtel dans la base de données ici (par exemple)
+      const newHotel = {
+        name,
+        description,
+        email,
+        tel,
+        pricePerNight,
+        currency,
+        imageUrl: image ? image.path : null
+      };
+  
+      // Retourner la réponse
+      res.status(201).json({ hotel: newHotel });
     } catch (error) {
-        res.status(500).json({ message: 'Erreur lors de la récupération des hôtels', error: error.message });
+      console.error("Erreur lors de l'ajout de l'hôtel : ", error);
+      res.status(500).send({ message: 'Erreur serveur' });
     }
-});
+  });
 
-// Route pour l'ajout d'un hôtel
-app.post('/hotel', upload.single('image'), async (req, res) => {
-    const { name, description, email, tel, pricePerNight, currency } = req.body;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null; // L'URL de l'image téléchargée
-
-    try {
-        // Création d'un nouvel hôtel
-        const newHotel = new HotelModel({
-            name,
-            description,
-            email,
-            tel,
-            pricePerNight,
-            currency,
-            imageUrl,
-        });
-
-        // Sauvegarde dans la base de données
-        await newHotel.save();
-        
-        res.status(201).json({
-            message: 'Hôtel créé avec succès',
-            hotel: newHotel,
-        });
-    } catch (error) {
-        console.error("Erreur lors de la sauvegarde de l'hôtel:", error.message);
-        res.status(500).json({ message: 'Erreur lors de la création de l\'hôtel', error: error.message });
-    }
-});
 
 // Serveur
 app.listen(3001, () => {
     console.log("Le serveur fonctionne sur le port 3001");
 });
+
+
+

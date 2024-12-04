@@ -9,7 +9,7 @@ import { FaUserFriends } from "react-icons/fa";
 // Styled-components
 const Div = styled.div`
     background-color: #F0F0F0;
-    height: 500vh;
+    height: 1000vh;
     padding-top: 70px;
   @media (max-width: 768px) {
     padding-top: 71px;

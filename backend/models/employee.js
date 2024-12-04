@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema({
+    name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    resetPasswordToken: String,
-    resetPasswordExpires: Date,
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
 });
 
-const Employee = mongoose.model('Employee', employeeSchema);
-
-module.exports = Employee;
+module.exports = mongoose.model('Employee', employeeSchema);

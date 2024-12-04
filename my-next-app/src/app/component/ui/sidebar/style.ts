@@ -107,30 +107,39 @@ export const Ul = styled.ul`
   display: inline-block;
 
   @media (max-width: 768px) {
-    display: none; // Cacher le menu complet sur mobile
+    display: none; 
   }
 `;
 
-export const Navbar = styled.nav``;
+export const Navbar = styled.nav`
+margin: 0;
+padding: 0;
+`;
 
 export const Li = styled.li`
-   margin: 20px 0;
-   border-radius: 8px;
-   transition: all 0.3s ease;
+   margin: 5px 0;
+  //  border-radius: 8px;
+  //  transition: all 0.3s ease;
 
    &.active {
      background-color: #f0f0f0;
      color: white;
-     padding: 5px 40px;
+     padding: 0px 40px;
+     height: 50px;
+     border: none;
    }
 
    &.active .icon {
      color: #4a4e52;
+     position: relative;
+     top: -15px;
    }
 
    &.active .text {
      color: #4a4e52;
      font-weight: bold;
+     position: relative;
+     top: -15px;
    }
 
    a {
@@ -174,4 +183,45 @@ export const MobileIcons = styled.div`
     width: 25px;
     height: 25px;
   }
+`;
+export const Contact = styled.div`
+display: grid;
+position: relative;
+top: 350px;
+`;
+export const Lign = styled.div`
+ border-top: 1px solid white;
+ margin: 0;
+ width: 90%;
+`;
+export const Content = styled.div`
+display: flex;
+padding: 20px;
+gap: 10px;
+`;
+export const Monimg = styled.div`
+   font-size: 60px;
+   color: #DADBDB;
+   padding-top: 10px;
+`;
+export const Users = styled.div`
+display: grid;
+
+h1{
+  font-size: 25px;
+  color: #DADBDB;
+  margin: 10px;
+}
+`;
+export const P = styled.div`
+   display: flex;
+   color: #1EAF74;
+   gap: 10px;
+   position: relative;
+   top: -5px;
+   p{
+     color: #9D9FA0;
+     position: relative;
+    top: -5px;
+   }
 `;
