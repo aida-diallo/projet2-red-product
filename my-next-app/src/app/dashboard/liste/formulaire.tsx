@@ -441,6 +441,237 @@ export default Modal;
 
 
 
+// import React, { useState } from "react";
+// import styled from "styled-components";
+// import { WiDirectionLeft } from "react-icons/wi";
+// import { IoImageOutline } from "react-icons/io5";
+
+
+// // Styles pour Modal (existant)
+// const Overlay = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background: rgba(0, 0, 0, 0.5);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+ 
+
+//     @media (max-width: 600px) {
+      
+//    }
+// `;
+
+// const ModalContainer = styled.div`
+//   background: white;
+//   padding: 0;
+//   border-radius: 8px;
+//  height: 700px;
+//   width: 50%; 
+
+
+//   @media (max-width: 600px) {
+//        width: 90%; 
+//   max-width: 600px; 
+ 
+//    }
+// `;
+
+// const Title = styled.div`
+//   display: flex;
+//   padding: 10px;
+//   font-size: 20px;
+  
+//   h2 {
+//     font-size: 15px;
+//     margin-top: -3px;
+//     margin-left: 10px; 
+//   }
+// `;
+
+// const DashedLine = styled.div`
+//   border-top: 1px dashed #e5e7eb;
+//   width: calc(100% - 60px); 
+//   margin: 20px; 
+// `;
+
+// const Form = styled.form`
+//   padding: 20px; 
+// `;
+
+// const Row = styled.div`
+//   display: flex;
+//   flex-wrap: wrap; 
+//   gap: 20px;
+//   padding: 15px;
+
+//     @media (max-width: 600px) {
+//   padding: 0;
+//    }
+// `;
+
+// const FormGroup = styled.div`
+//   flex-basis: calc(50% - 10px); 
+  
+//   @media (max-width: 600px) {
+//     flex-basis: calc(100% - 10px); 
+//     margin-bottom: 15px; 
+//     width: 100%;
+//    }
+// `;
+
+// const Label = styled.label`
+//   display: block;
+//   margin-bottom: 5px;
+// `;
+
+// const Input = styled.input`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 15px;
+//   width: 100%;
+  
+
+//     @media (max-width: 600px) {
+//     height: 30px;
+//     width: 100%;
+//    }
+ 
+// `;
+
+// const Button = styled.button`
+//    height: 60px; 
+//    background-color:#43474A; 
+//    color:white; 
+//    text-align:center; 
+//    border-radius:10px; 
+//    width: 150px; 
+//    margin-top:20px; 
+//    justify-content: end;
+//    left: 600px;
+//    position: relative;
+//    font-size: 20px;
+
+
+//      @media (max-width: 600px) {
+//      padding-top: 5px;
+//    }
+// `;
+
+// const StyledSelect = styled.select`
+//    padding: 10px; 
+//    border-radius:15px; 
+//    border:1px solid #ccc; 
+//    width: 100%;
+
+
+//    @media (max-width: 600px) {
+//   height: 40px;
+//     width: 100%;
+//    }
+// `;
+
+// const ModalHeader = styled.div`
+//    display:grid; 
+//    align-items:center; 
+//    justify-content:center; 
+//    cursor:pointer; 
+//    border-radius:10px; 
+//    height: 150px;
+//    border: 1px solid #ccc; 
+//    padding-top:10px;
+//       display: flex;
+//   flex-direction: column;
+//      align-items: center;
+//     cursor: pointer;
+
+
+//    h2 {
+//      margin-left: 0px; 
+//      color: rgb(156, 163, 175);
+//     font-weight: 600;
+//     font-size: 18px;
+//     position: relative;
+//     top: 0px;
+//    }
+//        @media (max-width: 600px) {
+//    border-radius:10px; 
+//    width: 100%;
+//    border: 1 px solid #ccc;
+//    }
+// `;
+
+
+// export const ImagePreviewContainer = styled.div`
+//   position: relative;
+//   width: 100%;  
+//   height: 200px; 
+//   overflow: hidden; 
+//   border: 1px solid #ccc; 
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+
+// export const ImagePreview = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover; 
+// `;
+
+// // Modal Component
+// interface ModalProps {
+//    isOpen: boolean;
+//    onClose(): void;
+//    onSubmit(data: any): void;
+// }
+
+// const Modal = ({ isOpen, onClose, onSubmit }: ModalProps) => {
+//    const [formData, setFormData] = useState({
+//        name: "",
+//        description: "",
+//        email: "",
+//        tel: "",
+//        pricePerNight: "",
+//        currency: "XOF",
+//    });
+
+//    const handleChange = (e:any) => {
+//        setFormData({ ...formData, [e.target.name]: e.target.value });
+//    };
+
+//    const handleSubmit = async (e:any) => {
+//        e.preventDefault();
+//        await onSubmit(formData); // Call the onSubmit function passed from ListePage
+//        onClose(); // Close modal after submission
+//    };
+
+//    if (!isOpen) return null;
+
+//    return (
+//        <Overlay>
+//            <ModalContainer>
+//                <h2>Créer un nouvel hôtel</h2>
+//                <Form onSubmit={handleSubmit}>
+//                    <Input type="text" name="name" placeholder="Nom de l'hôtel" required onChange={handleChange} />
+//                    <Input type="text" name="description" placeholder="Description" required onChange={handleChange} />
+//                    <Input type="email" name="email" placeholder="Email" required onChange={handleChange} />
+//                    <Input type="tel" name="tel" placeholder="Numéro de téléphone" required onChange={handleChange} />
+//                    <Input type="number" name="pricePerNight" placeholder="Prix par nuit" required onChange={handleChange} />
+//                    <button type="submit">Enregistrer</button>
+//                </Form>
+//            </ModalContainer>
+//        </Overlay>
+//    );
+// };
+
+// export default Modal;
+
+
+
 
 
 
