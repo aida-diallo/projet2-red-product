@@ -21,15 +21,25 @@ const RegisterPage = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        // Envoi des données d'inscription au backend
+    
+       
         axios.post('http://localhost:3001/register', { name, email, password })
             .then(result => {
                 console.log(result);
                 router.push('/login');
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error("Erreur lors de la requête :", err);
+                if (err.response) {
+                    console.error("Réponse du serveur : ", err.response.data);
+                } else if (err.request) {
+                    console.error("Problème avec la requête : ", err.request);
+                } else {
+                    console.error("Erreur inconnue : ", err.message);
+                }
+            });
     };
+    
 
     return (
         <Container>
