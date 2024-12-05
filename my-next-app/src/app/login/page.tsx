@@ -8,8 +8,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-const Login = ({ data }: { data: any }) => {
-    
+type LoginProps = {
+    data: any; 
+  };
+
+  const Login = ({ data }: LoginProps) => {
+    console.log(data);
+
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -46,6 +51,7 @@ const Login = ({ data }: { data: any }) => {
                 <img src="/icon.png" alt="icon" />
                 <h1>RED PRODUCT</h1>
             </Icon>
+            
             <FormContainer onSubmit={handleSubmit}>
                 <p>Connectez-vous en tant que Admin</p>
                 <Input
