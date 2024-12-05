@@ -220,8 +220,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "./formulaire"; // Ensure this imports your modal component
-import HotelCard from "./hotelCard"; // Ensure this imports your hotel card component
+import Modal from "./formulaire"; 
+import HotelCard from "./hotelCard"; 
 
 // Styles
 const Liste = styled.div`

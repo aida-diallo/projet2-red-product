@@ -214,13 +214,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Servir les fichiers statiques dans le dossier `uploads`
-// Assuming you have a fileName variable
-
-const img = document.createElement('img');
-img.src = `/dashboard/uploads/${encodeURIComponent(fileName)}`; // Crucial Encoding
-document.body.appendChild(img);
-
 // **Routes**
 
 // Route pour l'authentification (connexion)
