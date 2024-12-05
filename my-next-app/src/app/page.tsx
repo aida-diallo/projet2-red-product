@@ -12,7 +12,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/endpoint`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/data-endpoint`, {
           method: 'GET',
         });
 
@@ -22,15 +22,19 @@ const HomePage = () => {
 
         const result = await response.json();
         setData(result);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Une erreur inconnue s\'est produite');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []); // Vide pour exécuter une seule fois au chargement
+  }, []);
 
   return (
     <Container>

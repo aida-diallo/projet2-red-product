@@ -1,91 +1,87 @@
 'use client';
+
 import React, { useState } from 'react';
 import {
-    Container, FormContainer, Input, Button,
-    LinkContainer, Label, LabelText, Icon
+  Container, FormContainer, Input, Button,
+  LinkContainer, Label, LabelText, Icon
 } from './style';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 type LoginProps = {
-    data: any; 
+  data: any; // Données reçues du backend
+};
+
+const Login = ({ data }: LoginProps) => {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/login`, // Chemin à vérifier
+        { email, password },
+        { timeout: 5000 }
+      );
+
+      if (response.data === 'success') {
+        router.push('/dashboard');
+      } else {
+        console.error('Authentication failed:', response.data);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la connexion :', error);
+    }
   };
 
-  const Login = ({ data }: LoginProps) => {
-    console.log(data);
+  return (
+    <Container>
+      <Icon>
+        <img src="/icon.png" alt="icon" />
+        <h1>RED PRODUCT</h1>
+      </Icon>
 
-    const router = useRouter();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post(
-                'http://localhost:3001/login',
-                { email, password },
-                { timeout: 5000 } 
-            );
-
-            console.log(response);
-            if (response.data === "success") {
-                router.push('/dashboard');
-            } else {
-                console.error('Authentication failed:', response.data);
-            }
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.error('AxiosError:', error.message);
-                console.error('Details:', error.response || error.request);
-            } else {
-                console.error('Unexpected error:', error);
-            }
-        }
-    };
- 
-    return (
-        <Container>
-            <Icon>
-                <img src="/icon.png" alt="icon" />
-                <h1>RED PRODUCT</h1>
-            </Icon>
-            
-            <FormContainer onSubmit={handleSubmit}>
-                <p>Connectez-vous en tant que Admin</p>
-                <Input
-                    type="email"
-                    placeholder="Email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <Input
-                    type="password"
-                    placeholder="Mot de passe"
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <Label>
-                    <Input type="checkbox" />
-                    <LabelText>Gardez-moi connecté</LabelText>
-                </Label>
-                <Button type="submit">Se connecter</Button>
-            </FormContainer>
-            <LinkContainer>
-                <div>
-                    <Link href="/password">Mot de passe oublié</Link>
-                </div>
-                <div>
-                    Vous n'avez pas de compte ?{' '}
-                    <Link href="/register">S'inscrire</Link>
-                </div>
-            </LinkContainer>
-        </Container>
-    );
+      <FormContainer onSubmit={handleSubmit}>
+        <p>Connectez-vous en tant qu'Admin</p>
+        <Input
+          type="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="Mot de passe"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Label>
+          <Input type="checkbox" />
+          <LabelText>Gardez-moi connecté</LabelText>
+        </Label>
+        <Button type="submit">Se connecter</Button>
+      </FormContainer>
+      <LinkContainer>
+        <div>
+          <Link href="/password">Mot de passe oublié</Link>
+        </div>
+        <div>
+          Vous n'avez pas de compte ?{' '}
+          <Link href="/register">S'inscrire</Link>
+        </div>
+      </LinkContainer>
+    </Container>
+  );
 };
 
 export default Login;
+
 
 
 
