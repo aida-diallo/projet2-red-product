@@ -181,7 +181,9 @@ const EmployeeModel = require('./models/employee');
 const HotelModel = require('./models/hotel');
 
 const app = express();
+const PORT = 3001;
 
+// Middleware
 app.use(express.json());
 app.use(cors());
 
@@ -206,11 +208,20 @@ const storage = multer.diskStorage({
         cb(null, uploadDir); 
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); 
+        const sanitizedFilename = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '');
+        cb(null, Date.now() + '-' + sanitizedFilename);
     },
 });
-
 const upload = multer({ storage });
+
+// Servir les fichiers statiques dans le dossier `uploads`
+// Assuming you have a fileName variable
+
+const img = document.createElement('img');
+img.src = `/dashboard/uploads/${encodeURIComponent(fileName)}`; // Crucial Encoding
+document.body.appendChild(img);
+
+// **Routes**
 
 // Route pour l'authentification (connexion)
 app.post('/login', async (req, res) => {
@@ -256,7 +267,7 @@ app.post('/password', async (req, res) => {
         user.resetPasswordExpires = Date.now() + 3600000; // 1 heure d'expiration
         await user.save();
 
-        const resetLink = `http://localhost:3001/reset-password/${resetToken}`;
+        const resetLink = `http://localhost:${PORT}/reset-password/${resetToken}`;
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
@@ -275,7 +286,7 @@ app.post('/password', async (req, res) => {
 app.post('/hotels', upload.single('image'), async (req, res) => {
     try {
         const { name, description, email, tel, pricePerNight, currency } = req.body;
-        const image = req.file;  // Récupération de l'image téléchargée
+        const image = req.file; // Récupération de l'image téléchargée
 
         if (!name || !description || !email || !tel || !pricePerNight) {
             return res.status(400).send({ message: 'Tous les champs sont obligatoires' });
@@ -288,7 +299,7 @@ app.post('/hotels', upload.single('image'), async (req, res) => {
             tel,
             pricePerNight,
             currency,
-            imageUrl: image ? image.path : null
+            imageUrl: image ? image.filename : null,
         });
 
         await newHotel.save();
@@ -310,6 +321,6 @@ app.get('/hotels', async (req, res) => {
 });
 
 // Démarrage du serveur
-app.listen(3001, () => {
-    console.log("Le serveur fonctionne sur le port 3001");
+app.listen(PORT, () => {
+    console.log(`Le serveur fonctionne sur le port ${PORT}`);
 });

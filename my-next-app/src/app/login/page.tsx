@@ -8,7 +8,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ data }: { data: any }) => {
+    
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
