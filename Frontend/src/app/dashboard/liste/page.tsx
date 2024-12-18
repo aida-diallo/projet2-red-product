@@ -128,7 +128,10 @@ const Plus = styled.div`
  text-align: center;
  margin-top: 8rem;
  font-style: italic;
-
+ justify-content: center;
+ position: relative;
+ left: 250px;
+top: 100px;
  `;
 const HotelList: React.FC = () => {
   const [hotels, setHotels] = useState<any[]>([]);
@@ -191,7 +194,7 @@ const HotelList: React.FC = () => {
            imageUrl={hotel.imageUrl}
          />))}</>
             
-          :<><Div>
+          :<><Div style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
           Pas d'hotels pour le moment Veuillez en Ajouter
         <Box>
             <ButtonCenter onClick={() => setIsModalOpen(true)}>
