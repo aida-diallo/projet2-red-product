@@ -3,7 +3,7 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import styled from 'styled-components';
 import Navbar from '../navbar/navbar'; 
-import Sidebar from '../sidebar/page'; 
+import Sidebar from '../sidebar/sidebar'; 
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
