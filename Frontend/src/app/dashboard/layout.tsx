@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, ReactNode } from 'react';
 import styled from 'styled-components';
-import Navbar from '../navbar/page'; 
+import Navbar from '../navbar/navbar'; 
 import Sidebar from '../sidebar/page'; 
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
