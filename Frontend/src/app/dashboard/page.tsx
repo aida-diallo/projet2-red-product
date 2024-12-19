@@ -122,13 +122,13 @@ const Content = styled.div`
 
 
 interface KPI {
-   id: number,
-   number: string,
-   name: string,
-   para?: string,
-   icon?: JSX.Element,
-   bgColor?: string,
-}
+    id: number;
+    number: string;
+    name: string;
+    para?: string;
+    icon?: React.ReactElement; 
+    bgColor?: string;
+ }
 
 // Tableau des KPI
 const kpis : KPI[] = [
