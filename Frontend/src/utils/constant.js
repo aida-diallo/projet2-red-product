@@ -1,1 +1,1 @@
-export const baseURL = `http://localhost:5000/api`
+export const baseURL = `https://projet2-red-product.onrender.com/api`

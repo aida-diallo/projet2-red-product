@@ -278,7 +278,7 @@ const AddHotelModal: React.FC<ModalProps> = ({ isOpen, onClose, onHotelAdded }) 
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/hotels', {
+            const response = await axios.post('https://projet2-red-product.onrender.com/api/hotels', {
                 name,
                 email,
                 tel,

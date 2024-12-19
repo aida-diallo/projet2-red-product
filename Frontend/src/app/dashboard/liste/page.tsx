@@ -144,7 +144,7 @@ const HotelList: React.FC = () => {
 
   const fetchHotels = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/hotels');
+      const response = await axios.get('https://projet2-red-product.onrender.com/api/hotels');
       setHotels(response.data.hotels);
     } catch (error) {
       console.error('Erreur lors de la récupération des hôtels', error);
