@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "test":"echo \"Error: no test specified\"&& exit 1",
     "dev": "nodemon Server.js",
     "start": "node Server.js",
-    "build": "npm run build"
+    "build": "npm i"
   },
   "keywords": [],
   "author": "",
