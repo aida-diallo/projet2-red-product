@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const bcrypt = require('bcrypts');
+const bcrypt = require('bcryptjs');
 
 const auth = (req, res) => {
     
