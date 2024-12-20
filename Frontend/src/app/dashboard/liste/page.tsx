@@ -136,8 +136,16 @@ top: 100px;
 const HotelList: React.FC = () => {
   const [hotels, setHotels] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user') ?? "null")
+  // const user = JSON.parse(localStorage.getItem('user') ?? "null")
+  const [user, setUser] = useState<any>(null);
 
+  useEffect(() => {
+    // Move localStorage access to useEffect
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
   useEffect(() => {
     fetchHotels();
   }, []);

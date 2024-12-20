@@ -64,17 +64,30 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     }
   };
 
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   console.log(token);
+    
+    
+  //   if (!token) {
+  //     toast.error("Vous devez être connecté pour accéder à cette page.");
+  //     router.push('/login');
+  //     return;
+  //   }
+    
+  // }, [router]);
+
+
+
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    
-    
-    if (!token) {
-      toast.error("Vous devez être connecté pour accéder à cette page.");
-      router.push('/login');
-      return;
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error("Vous devez être connecté pour accéder à cette page.");
+        router.push('/login');
+      }
     }
-    
   }, [router]);
 
   return (

@@ -42,8 +42,10 @@ const Sidebar = ({ onSelect }: SidebarProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const user = JSON.parse(localStorage.getItem('user') ?? "null") as User
   
 
@@ -58,7 +60,7 @@ const Sidebar = ({ onSelect }: SidebarProps) => {
     }
   }, [router]);
 
-  if (!user) return null;
+  if (!isClient || !user) return null;
 
   const menuItems = [
     {
