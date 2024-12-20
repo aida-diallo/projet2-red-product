@@ -43,6 +43,19 @@ export const SectionLogo = styled.section`
   }
 `;
 
+// export const LOGO = styled.div`
+//   display: flex;
+//   justify-content: start;
+//   font-weight: 500;
+//   font-size: 20px;
+//   margin-left: 20px;
+
+//   @media (max-width: 768px) {
+//     font-size: 18px;
+//     margin-left: 10px;
+//   }
+// `;
+
 
 export const Logo = styled.h2`
   display: flex;
