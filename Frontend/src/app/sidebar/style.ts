@@ -21,7 +21,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

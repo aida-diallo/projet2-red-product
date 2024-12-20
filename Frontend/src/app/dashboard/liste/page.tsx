@@ -58,7 +58,7 @@ const Box = styled.div`
    }
  `;
 
-const H1 = styled.h2`
+const H1 = styled.h1`
    font-weight: 400;
    font-size: 24px;
    display: flex;

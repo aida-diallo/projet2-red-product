@@ -28,10 +28,23 @@ export const SectionLogo = styled.section`
   align-items: center;
   height: 100%;
   flex: 1;
+
+  .logo{
+      display: flex;
+  justify-content: start;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+  }
 `;
 
 
-export const Logo = styled.h1`
+export const Logo = styled.h2`
   display: flex;
   justify-content: start;
   font-weight: 500;
