@@ -25,11 +25,10 @@ const Navbar: React.FC<NavbarProps> = ({ title, onLogout }) => {
   return (
     <Nav>
       <SectionLogo>
-        {/* <LOGO>   */}
         <Logo>
           <h2>{title}</h2> 
         </Logo>
-        {/* </LOGO> */}
+       
       </SectionLogo>
 
       <HamburgerIcon onClick={toggleMenu}>

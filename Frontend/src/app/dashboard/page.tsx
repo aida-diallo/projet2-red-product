@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaEnvelopeOpen, FaUserFriends } from "react-icons/fa";
 
+
 // Styled-components
 const Div = styled.div`
     background-color: #F0F0F0;
@@ -75,7 +76,7 @@ const Box = styled.div`
     }
 `;
 
-const IconWrapper = styled.div<{ bgColor?: string }>`
+const IconWrapper = styled.div<IconWrapperProps>`
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -84,7 +85,7 @@ const IconWrapper = styled.div<{ bgColor?: string }>`
     justify-content: center;
     font-size: 20px;
     color: white;
-    background-color: ${(props) => props.bgColor || "#A88ADD"};
+    background-color: ${(props) => props.$color || "#A88ADD"};
     margin-right: 15px;
 
     @media (max-width: 768px) {
@@ -120,6 +121,9 @@ const Content = styled.div`
     }
 `;
 
+interface IconWrapperProps {
+    $color?: string;  // Notez le préfixe $ qui indique une prop styled-components
+}
 
 interface KPI {
     id: number;
@@ -150,7 +154,10 @@ const Page = () => {
          <Flex>
             {kpis.map((kpi) => (
                <Box key={kpi.id}>
-                  <IconWrapper bgColor={kpi.bgColor}>{kpi.icon}</IconWrapper>
+                <IconWrapper $color={kpi.bgColor}>
+                            {kpi.icon}
+                        </IconWrapper>
+
                   <Content>
                      <h3>{kpi.number} {kpi.name}</h3>
                      <p>{kpi.para}</p>

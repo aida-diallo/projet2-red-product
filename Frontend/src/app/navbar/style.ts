@@ -29,12 +29,6 @@ export const SectionLogo = styled.section`
   height: 100%;
   flex: 1;
 
-  .logo{
-      display: flex;
-  justify-content: start;
-  font-weight: 500;
-  font-size: 20px;
-  margin-left: 20px;
 
   @media (max-width: 768px) {
     font-size: 18px;
@@ -43,18 +37,7 @@ export const SectionLogo = styled.section`
   }
 `;
 
-// export const LOGO = styled.div`
-//   display: flex;
-//   justify-content: start;
-//   font-weight: 500;
-//   font-size: 20px;
-//   margin-left: 20px;
 
-//   @media (max-width: 768px) {
-//     font-size: 18px;
-//     margin-left: 10px;
-//   }
-// `;
 
 
 export const Logo = styled.h2`

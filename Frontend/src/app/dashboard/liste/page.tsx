@@ -133,49 +133,152 @@ const Plus = styled.div`
  left: 250px;
 top: 100px;
  `;
+
+// const HotelList: React.FC = () => {
+//   const [hotels, setHotels] = useState<any[]>([]);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   // const user = JSON.parse(localStorage.getItem('user') ?? "null")
+//   const [user, setUser] = useState<any>(null);
+
+//   useEffect(() => {
+//     // Move localStorage access to useEffect
+//     const userData = localStorage.getItem('user');
+//     if (userData) {
+//       setUser(JSON.parse(userData));
+//     }
+//   }, []);
+//   useEffect(() => {
+//     fetchHotels();
+//   }, []);
+
+//   const fetchHotels = async () => {
+//     try {
+//       const response = await axios.get('https://projet2-red-product.onrender.com/api/hotels');
+//       setHotels(response.data.hotels);
+//     } catch (error) {
+//       console.error('Erreur lors de la récupération des hôtels', error);
+//     }
+//   };
+
+//   const userHotels = hotels?.filter((elem) => elem.userId === user.id);
+//   console.log("la liste = ", userHotels);
+  
+
+//   const handleHotelAdded = (newHotel: any) => {
+//     setHotels(prevHotels => [newHotel, ...prevHotels]);
+//   };
+
+//   return (
+//     <Liste>
+//       <Container>
+//         <Row>
+//           <Box>
+//           <H1>Hôtels 
+//           <HotelCount>{userHotels.length}</HotelCount>
+
+//           </H1>
+//           </Box>
+//           <Box>
+//             <Button onClick={() => setIsModalOpen(true)}>
+//               <Plus>
+//                 <GoPlus />
+//               </Plus>
+//               Créer un nouveau un hôtel
+//             </Button>
+//           </Box>
+//         </Row>
+
+//         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+          
+//          {userHotels.length > 0 ? 
+//          <> {userHotels.map((hotel) => (
+//           <HotelCard
+//            key={hotel._id}
+//            name={hotel.name}
+//            address={hotel.address}
+//            email={hotel.email}
+//            tel={hotel.tel}
+//            pricePerNight={hotel.pricePerNight}
+//            currency={hotel.currency}
+//            imageUrl={hotel.imageUrl}
+//          />))}</>
+            
+//           :<><Div style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+//           Pas d'hotels pour le moment Veuillez en Ajouter
+//         <Box>
+//             <ButtonCenter onClick={() => setIsModalOpen(true)}>
+//               <Plusplus>
+//                 <GoPlus />
+//               </Plusplus>
+//               Créer un nouveau un hôtel
+//             </ButtonCenter>
+//           </Box>
+//         </Div></>}
+//         </div>
+
+//         <AddHotelModal
+//           isOpen={isModalOpen}
+//           onClose={() => setIsModalOpen(false)}
+//           onHotelAdded={handleHotelAdded}
+//         />
+//       </Container>
+//     </Liste>
+//   );
+// };
+
+// export default HotelList;
+
+
+
+
+
+
+
 const HotelList: React.FC = () => {
   const [hotels, setHotels] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const user = JSON.parse(localStorage.getItem('user') ?? "null")
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Move localStorage access to useEffect
     const userData = localStorage.getItem('user');
     if (userData) {
       setUser(JSON.parse(userData));
     }
   }, []);
+
   useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const response = await axios.get('https://projet2-red-product.onrender.com/api/hotels');
+        setHotels(response.data.hotels);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des hôtels', error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchHotels();
   }, []);
 
-  const fetchHotels = async () => {
-    try {
-      const response = await axios.get('https://projet2-red-product.onrender.com/api/hotels');
-      setHotels(response.data.hotels);
-    } catch (error) {
-      console.error('Erreur lors de la récupération des hôtels', error);
-    }
-  };
-
-  const userHotels = hotels?.filter((elem) => elem.userId === user.id);
-  console.log("la liste = ", userHotels);
-  
+  const userHotels = user ? hotels.filter((elem) => elem.userId === user.id) : [];
 
   const handleHotelAdded = (newHotel: any) => {
     setHotels(prevHotels => [newHotel, ...prevHotels]);
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Add a spinner or loading animation here
+  }
 
   return (
     <Liste>
       <Container>
         <Row>
           <Box>
-          <H1>Hôtels 
-          <HotelCount>{userHotels.length}</HotelCount>
-
-          </H1>
+            <H1>Hôtels
+              <HotelCount>{userHotels?.length || 0}</HotelCount>
+            </H1>
           </Box>
           <Box>
             <Button onClick={() => setIsModalOpen(true)}>
@@ -188,31 +291,32 @@ const HotelList: React.FC = () => {
         </Row>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-          
-         {userHotels.length > 0 ? 
-         <> {userHotels.map((hotel) => (
-          <HotelCard
-           key={hotel._id}
-           name={hotel.name}
-           address={hotel.address}
-           email={hotel.email}
-           tel={hotel.tel}
-           pricePerNight={hotel.pricePerNight}
-           currency={hotel.currency}
-           imageUrl={hotel.imageUrl}
-         />))}</>
-            
-          :<><Div style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
-          Pas d'hotels pour le moment Veuillez en Ajouter
-        <Box>
-            <ButtonCenter onClick={() => setIsModalOpen(true)}>
-              <Plusplus>
-                <GoPlus />
-              </Plusplus>
-              Créer un nouveau un hôtel
-            </ButtonCenter>
-          </Box>
-        </Div></>}
+          {userHotels.length > 0 ? (
+            userHotels.map((hotel) => (
+              <HotelCard
+                key={hotel._id}
+                name={hotel.name}
+                address={hotel.address}
+                email={hotel.email}
+                tel={hotel.tel}
+                pricePerNight={hotel.pricePerNight}
+                currency={hotel.currency}
+                imageUrl={hotel.imageUrl}
+              />
+            ))
+          ) : (
+            <Div>
+              Pas d'hotels pour le moment. Veuillez en Ajouter.
+              <Box>
+                <ButtonCenter onClick={() => setIsModalOpen(true)}>
+                  <Plusplus>
+                    <GoPlus />
+                  </Plusplus>
+                  Créer un nouveau un hôtel
+                </ButtonCenter>
+              </Box>
+            </Div>
+          )}
         </div>
 
         <AddHotelModal
@@ -226,3 +330,6 @@ const HotelList: React.FC = () => {
 };
 
 export default HotelList;
+
+
+
